@@ -172,7 +172,7 @@ const createBlog = async (data) => {
 
   const [result] = await pool.query(
     `INSERT INTO blogs (title, description, image, author, date, is_featured, status)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
     [title, description, image, author, date, is_featured, status]
   );
 
