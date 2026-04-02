@@ -340,7 +340,16 @@ const updateBook = async (id, updateData, mainImage, subImages, oldImages) => {
     `UPDATE books 
      SET name=?, category_id=?, subcategory_id=?, price=?, discount=?, description=?
      WHERE id=?`,
-    [name, category_id, subcategory_id, price, discount, description, id]
+    [
+      name,
+      category_id,
+      subcategory_id,
+      price,
+      cleanDiscount(discount),
+      ,
+      description,
+      id,
+    ]
   );
 
   // 2️⃣ update book_details
@@ -351,16 +360,16 @@ const updateBook = async (id, updateData, mainImage, subImages, oldImages) => {
      page_count=?, cover_type=?
      WHERE book_id=?`,
     [
-      barcode,
-      supplier_name,
-      authors,
-      publisher,
-      published_year,
-      language,
-      weight_gram,
-      dimensions,
-      page_count,
-      cover_type,
+      barcode || null,
+      supplier_name || null,
+      authors || null,
+      publisher || null,
+      cleanInt(published_year),
+      language || null,
+      cleanInt(weight_gram),
+      dimensions || null,
+      cleanInt(page_count),
+      cover_type || null,
       id,
     ]
   );
