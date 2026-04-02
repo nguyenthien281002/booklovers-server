@@ -211,6 +211,12 @@ const getBookById = async (id) => {
   };
 };
 
+const cleanInt = (v) => {
+  if (v === "" || v === null || v === undefined) return null;
+  const n = Number(v);
+  return Number.isNaN(n) ? null : n;
+};
+
 // Thêm sách mới
 const createBook = async (bookData, mainImage, subImages) => {
   const {
@@ -246,19 +252,19 @@ const createBook = async (bookData, mainImage, subImages) => {
   await pool.query(
     `INSERT INTO book_details
       (book_id, barcode, supplier_name, authors, publisher, published_year, language, weight_gram, dimensions, page_count, cover_type)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       bookId,
-      barcode ?? "", // nếu null/undefined -> ""
-      supplier_name ?? "",
-      authors ?? "",
-      publisher ?? "",
-      published_year ?? 0, // nếu năm xuất bản chưa có -> 0
-      language ?? "",
-      weight_gram ?? 0, // nếu chưa có -> 0
-      dimensions ?? "",
-      page_count ?? 0, // nếu chưa có -> 0
-      cover_type ?? "",
+      barcode || null,
+      supplier_name || null,
+      authors || null,
+      publisher || null,
+      cleanInt(published_year),
+      language || null,
+      cleanInt(weight_gram),
+      dimensions || null,
+      cleanInt(page_count),
+      cover_type || null,
     ]
   );
 
