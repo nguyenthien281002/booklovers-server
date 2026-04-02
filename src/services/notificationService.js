@@ -22,7 +22,18 @@ const markAllAsRead = async (user_id) => {
   return true;
 };
 
+const deleteAllNotifications = async (user_id) => {
+  await pool.query(
+    `DELETE FROM notifications
+     WHERE user_id = ?`,
+    [user_id]
+  );
+
+  return true;
+};
+
 export default {
   getNotifications,
   markAllAsRead,
+  deleteAllNotifications,
 };

@@ -25,7 +25,21 @@ const markAllAsRead = async (req, res) => {
   }
 };
 
+const deleteAllNotifications = async (req, res) => {
+  try {
+    const { user_id } = req.params;
+
+    await notificationService.deleteAllNotifications(user_id);
+
+    res.json({ message: "Đã xoá tất cả thông báo" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json("Lỗi server");
+  }
+};
+
 export default {
   getNotifications,
   markAllAsRead,
+  deleteAllNotifications,
 };

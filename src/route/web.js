@@ -362,10 +362,13 @@ const initWebRoutes = (app) => {
     "/api/admin/notifications/:user_id",
     notificationController.getNotifications
   );
-
   router.put(
     "/api/admin/notifications/read-all/:user_id",
     notificationController.markAllAsRead
+  );
+  router.delete(
+    "/api/admin/notifications/:user_id",
+    notificationController.deleteAllNotifications
   );
 
   // ---- chat options ----
