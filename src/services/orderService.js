@@ -137,7 +137,8 @@ const createOrderSocket = async (data) => {
       content: `${fullname} vừa đặt đơn #${orderCode}`,
       type: "order",
       is_read: 0,
-      created_at: new Date(),
+      // created_at: new Date(), // dưới local
+      created_at: new Date(Date.now() + 7 * 60 * 60 * 1000), // quan trong trên dbeaver
     },
   };
 };
