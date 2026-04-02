@@ -262,7 +262,6 @@ const createBook = async (bookData, mainImage, subImages) => {
       subcategory_id,
       price,
       cleanDiscount(discount),
-      ,
       description,
     ]
   );
