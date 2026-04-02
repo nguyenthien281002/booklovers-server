@@ -346,7 +346,6 @@ const updateBook = async (id, updateData, mainImage, subImages, oldImages) => {
       subcategory_id,
       price,
       cleanDiscount(discount),
-      ,
       description,
       id,
     ]
