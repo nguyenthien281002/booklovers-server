@@ -217,6 +217,19 @@ const cleanInt = (v) => {
   return Number.isNaN(n) ? null : n;
 };
 
+const cleanDiscount = (v) => {
+  if (v === "" || v === null || v === undefined) return 0;
+
+  const n = Number(v);
+  if (Number.isNaN(n)) return 0;
+
+  // chặn giá trị bất hợp lý
+  if (n < 0) return 0;
+  if (n > 100) return 100;
+
+  return n;
+};
+
 // Thêm sách mới
 const createBook = async (bookData, mainImage, subImages) => {
   const {
@@ -243,7 +256,15 @@ const createBook = async (bookData, mainImage, subImages) => {
     `INSERT INTO books
     (name, category_id, subcategory_id, price, discount, description)
     VALUES (?, ?, ?, ?, ?, ?)`,
-    [name, category_id, subcategory_id, price, discount, description]
+    [
+      name,
+      category_id,
+      subcategory_id,
+      price,
+      cleanDiscount(discount),
+      ,
+      description,
+    ]
   );
 
   const bookId = result.insertId;
